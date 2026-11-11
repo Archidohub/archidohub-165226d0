@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep catalog and order records in Lovable Cloud with server-verified administrator access; storefront pages consume persisted catalog overrides so owner edits apply consistently across product discovery and checkout.

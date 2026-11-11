@@ -14,13 +14,150 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      orders: {
+        Row: {
+          cashfree_order_id: string | null
+          created_at: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string
+          id: string
+          items: Json
+          payment_method: string
+          payment_status: string
+          shipping_address: string
+          shipping_fee: number
+          subtotal_amount: number
+          total_amount: number
+        }
+        Insert: {
+          cashfree_order_id?: string | null
+          created_at?: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string
+          id?: string
+          items: Json
+          payment_method: string
+          payment_status: string
+          shipping_address: string
+          shipping_fee: number
+          subtotal_amount: number
+          total_amount: number
+        }
+        Update: {
+          cashfree_order_id?: string | null
+          created_at?: string
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string
+          id?: string
+          items?: Json
+          payment_method?: string
+          payment_status?: string
+          shipping_address?: string
+          shipping_fee?: number
+          subtotal_amount?: number
+          total_amount?: number
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          badge: string | null
+          category: string
+          created_at: string
+          description: string
+          features: string[]
+          id: string
+          image: string
+          is_active: boolean
+          name: string
+          original_price: number
+          popularity: number
+          price: number
+          rating: number
+          reviews: number
+          tags: string[]
+        }
+        Insert: {
+          badge?: string | null
+          category: string
+          created_at?: string
+          description?: string
+          features?: string[]
+          id: string
+          image: string
+          is_active?: boolean
+          name: string
+          original_price?: number
+          popularity?: number
+          price: number
+          rating?: number
+          reviews?: number
+          tags?: string[]
+        }
+        Update: {
+          badge?: string | null
+          category?: string
+          created_at?: string
+          description?: string
+          features?: string[]
+          id?: string
+          image?: string
+          is_active?: boolean
+          name?: string
+          original_price?: number
+          popularity?: number
+          price?: number
+          rating?: number
+          reviews?: number
+          tags?: string[]
+        }
+        Relationships: []
+      }
+      store_settings: {
+        Row: {
+          id: number
+          price_adjustment_percent: number
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          price_adjustment_percent?: number
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          price_adjustment_percent?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_store_admin: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
