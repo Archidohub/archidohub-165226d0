@@ -12,3 +12,7 @@
 - [ ] Cashfree order create + verify server functions
 - [ ] End-to-end checkout test with real Cashfree order
 - [ ] Build log + preview check
+- [ ] Secure owner admin, database catalog and store-wide price controls
+- [ ] Persistent Cashfree and cash-on-delivery orders
+- [ ] Store-wide light/dark theme switch
+- [ ] Order email notifications (requires verified sender domain)
