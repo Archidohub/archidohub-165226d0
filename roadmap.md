@@ -16,3 +16,7 @@
 - [ ] Persistent Cashfree and cash-on-delivery orders
 - [ ] Store-wide light/dark theme switch
 - [ ] Order email notifications (requires verified sender domain)
+- [ ] AI-powered product recommendations on product detail pages
+- [ ] Store-wide light/dark theme switch and provided Instagram profile link
+- [ ] Update free-shipping threshold to ₹100 and delivery estimate to 5–6 days across storefront
+- [ ] Owner dashboard for persisted product add/edit/delete without AI credits
