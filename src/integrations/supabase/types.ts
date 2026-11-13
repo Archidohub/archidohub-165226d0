@@ -116,18 +116,45 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       store_settings: {
         Row: {
+          hidden_product_ids: string[]
           id: number
           price_adjustment_percent: number
           updated_at: string
         }
         Insert: {
+          hidden_product_ids?: string[]
           id?: number
           price_adjustment_percent?: number
           updated_at?: string
         }
         Update: {
+          hidden_product_ids?: string[]
           id?: number
           price_adjustment_percent?: number
           updated_at?: string
@@ -158,6 +185,7 @@ export type Database = {
     }
     Functions: {
       is_store_admin: { Args: { _user_id: string }; Returns: boolean }
+      list_hidden_product_ids: { Args: never; Returns: string[] }
     }
     Enums: {
       [_ in never]: never

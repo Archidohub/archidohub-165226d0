@@ -8,6 +8,27 @@
       "when": 1794407528862,
       "tag": "0000_store_admin_catalog_orders",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794565010128,
+      "tag": "0001_add_store_admin_profiles",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794565036161,
+      "tag": "0002_grant_store_admin_after_email_confirmation",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1794565178285,
+      "tag": "0003_support_public_catalog_removals",
+      "breakpoints": true
     }
   ]
 }

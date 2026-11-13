@@ -20,3 +20,4 @@
 - [ ] Store-wide light/dark theme switch and provided Instagram profile link
 - [ ] Update free-shipping threshold to ₹100 and delivery estimate to 5–6 days across storefront
 - [ ] Owner dashboard for persisted product add/edit/delete without AI credits
+- [ ] Create private administrator profile and signup-time role provisioning
