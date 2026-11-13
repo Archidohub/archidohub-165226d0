@@ -15,6 +15,13 @@
       "when": 1794565010128,
       "tag": "0001_add_store_admin_profiles",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794565036161,
+      "tag": "0002_grant_store_admin_after_email_confirmation",
+      "breakpoints": true
     }
   ]
 }
