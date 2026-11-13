@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep catalog and order records in Lovable Cloud with server-verified administrator access; storefront pages consume persisted catalog overrides so owner edits apply consistently across product discovery and checkout.
+- Keep user-facing administrator profile fields in `public.profiles`; derive access only from `public.user_roles` and verify it server-side for protected dashboard actions.

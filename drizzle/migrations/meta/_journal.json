@@ -8,6 +8,13 @@
       "when": 1794407528862,
       "tag": "0000_store_admin_catalog_orders",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794565010128,
+      "tag": "0001_add_store_admin_profiles",
+      "breakpoints": true
     }
   ]
 }
