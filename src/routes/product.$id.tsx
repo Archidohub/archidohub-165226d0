@@ -48,6 +48,7 @@ function ProductPage() {
     { src: product.image, cls: "object-cover scale-150" },
     { src: product.image, cls: "object-cover scale-125 object-top" },
   ];
+  const activeImage = gallery[active] ?? gallery[0];
 
   const related = products.filter((p) => p.id !== product.id && (p.category === product.category || p.tags.some((t) => product.tags.includes(t)))).slice(0, 4);
   const recent = recentlyViewed.filter((id) => id !== product.id).map(getProduct).filter((p): p is NonNullable<typeof p> => !!p).slice(0, 4);
@@ -57,7 +58,7 @@ function ProductPage() {
       <div className="grid gap-10 md:grid-cols-2">
         <div>
           <div className="aspect-square overflow-hidden rounded-[2rem] bg-secondary">
-            <img src={gallery[active].src} alt={product.name} width={1024} height={1024} className={cn("h-full w-full transition duration-500", gallery[active].cls)} />
+            <img src={activeImage.src} alt={product.name} width={1024} height={1024} className={cn("h-full w-full transition duration-500", activeImage.cls)} />
           </div>
           <div className="mt-3 flex gap-3">
             {gallery.map((g, i) => (
