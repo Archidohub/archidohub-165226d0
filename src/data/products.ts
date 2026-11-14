@@ -28,6 +28,7 @@ import p6 from "@/assets/products/p6.jpg";
 import p7 from "@/assets/products/p7.jpg";
 import p8 from "@/assets/products/p8.jpg";
 import p9 from "@/assets/products/p9.jpg";
+import { siteConfig } from "@/data/site-config";
 
 export interface Product {
   id: string; // unique, used in the product page URL
@@ -205,6 +206,31 @@ export const products: Product[] = [
 
 export function getProduct(id: string): Product | undefined {
   return products.find((p) => p.id === id);
+}
+
+export interface CheckoutItemInput {
+  id: string;
+  qty: number;
+}
+
+export function calculateShippingFee(subtotal: number): number {
+  return subtotal > siteConfig.freeShippingAbove ? 0 : siteConfig.shippingFee;
+}
+
+export function calculateCheckoutTotals(items: CheckoutItemInput[]) {
+  const orderItems = items.map(({ id, qty }) => {
+    const product = getProduct(id);
+    if (!product) throw new Error(`Unknown product: ${id}`);
+    return {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      qty,
+    };
+  });
+  const subtotal = orderItems.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const shippingFee = calculateShippingFee(subtotal);
+  return { items: orderItems, subtotal, shippingFee, total: subtotal + shippingFee };
 }
 
 export function discountPercent(p: Product): number {
