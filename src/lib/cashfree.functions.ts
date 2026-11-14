@@ -1,7 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { getRequest } from "@tanstack/react-start/server";
-import { getProduct } from "@/data/products";
+import { calculateCheckoutTotals, getProduct } from "@/data/products";
+import { siteConfig } from "@/data/site-config";
 
 /**
  * Cashfree Payments integration.
@@ -49,6 +50,16 @@ const checkoutInput = z.object({
   }),
 });
 
+const codOrderInput = z.object({
+  items: z.array(z.object({ id: z.string().min(1), qty: z.number().int().min(1).max(10) })).min(1).max(20),
+  customer: z.object({
+    name: z.string().trim().min(2).max(120),
+    email: z.string().trim().email().max(254),
+    phone: z.string().regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit Indian mobile number"),
+    address: z.string().trim().min(10, "Please enter your complete shipping address").max(500),
+  }),
+});
+
 // Prices are recomputed server-side from the catalog so a tampered
 // client can never pay a different amount.
 function computeAmount(items: { id: string; qty: number }[]) {
@@ -62,6 +73,42 @@ function computeAmount(items: { id: string; qty: number }[]) {
   }
   return { amount, lines };
 }
+
+export const createCodOrder = createServerFn({ method: "POST" })
+  .inputValidator((input) => codOrderInput.parse(input))
+  .handler(async ({ data }) => {
+    let totals: ReturnType<typeof calculateCheckoutTotals>;
+    try {
+      totals = calculateCheckoutTotals(data.items);
+    } catch {
+      return { ok: false as const, error: "One or more items are no longer available. Please refresh your bag." };
+    }
+
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: order, error } = await supabaseAdmin
+      .from("orders")
+      .insert({
+        customer_name: data.customer.name,
+        customer_email: data.customer.email,
+        customer_phone: data.customer.phone,
+        shipping_address: data.customer.address,
+        items: totals.items,
+        subtotal_amount: totals.subtotal,
+        shipping_fee: totals.shippingFee,
+        total_amount: totals.total,
+        payment_method: "cash_on_delivery",
+        payment_status: "cod_confirmed",
+      })
+      .select("id")
+      .single();
+
+    if (error || !order) {
+      console.error("Could not save Cash on Delivery order:", error?.message ?? "No order returned");
+      return { ok: false as const, error: "We couldn't place your order. Please try again." };
+    }
+
+    return { ok: true as const, orderId: order.id, total: totals.total };
+  });
 
 export const createCashfreeOrder = createServerFn({ method: "POST" })
   .inputValidator((input) => checkoutInput.parse(input))

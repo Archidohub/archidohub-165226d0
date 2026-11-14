@@ -95,8 +95,9 @@ export const siteConfig = {
   // Currency (Cashfree checkout charges in this currency)
   currency: { code: "INR", symbol: "₹" },
 
-  // Free shipping threshold shown on cart / checkout
-  freeShippingAbove: 499,
+  // Shipping is free on orders above ₹100 across India.
+  freeShippingAbove: 100,
+  shippingFee: 49,
 };
 
 export type SiteConfig = typeof siteConfig;

@@ -48,7 +48,7 @@ function ProductPage() {
     { src: product.image, cls: "object-cover scale-150" },
     { src: product.image, cls: "object-cover scale-125 object-top" },
   ];
-  const activeImage = gallery[active] ?? gallery[0];
+  const activeImage = gallery[active] ?? { src: product.image, cls: "object-cover" };
 
   const related = products.filter((p) => p.id !== product.id && (p.category === product.category || p.tags.some((t) => product.tags.includes(t)))).slice(0, 4);
   const recent = recentlyViewed.filter((id) => id !== product.id).map(getProduct).filter((p): p is NonNullable<typeof p> => !!p).slice(0, 4);
